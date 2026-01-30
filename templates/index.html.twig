@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <h2 style="margin-bottom: 25px; color: #2c3e50;">Recent Recipes</h2>
+    <div class="recipe-list">
+        {% for r in recipes %}
+            <div class="recipe-card">
+                <div class="recipe-content">
+                    <h3>{{ r.title }}</h3>
+                    <p class="recipe-info">
+                        <strong>Cuisine:</strong> {{ r.cuisine }} | 
+                        <strong>Difficulty:</strong> {{ r.difficulty }}
+                    </p>
+                </div>
+                <div class="recipe-actions">
+                    <a href="view.php?id={{ r.id }}" class="btn-action btn-view">View</a>
+                    <a href="edit.php?id={{ r.id }}" class="btn-action btn-edit">Edit</a>
+                    <a href="delete.php?id={{ r.id }}" class="btn-action btn-delete" onclick="return confirm('Are you sure?')">Delete</a>
+                </div>
+            </div>
+        {% else %}
+            <p>No recipes found. Start by adding one!</p>
+        {% endfor %}
+    </div>
+{% endblock %}

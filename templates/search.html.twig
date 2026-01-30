@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+<div class="search-container">
+    <div class="search-box">
+        <form method="GET" action="search.php" class="search-form">
+            <input type="text" name="keyword" value="{{ keyword }}" placeholder="Search recipes or cuisine...">
+            <select name="difficulty">
+                <option value="All" {% if difficulty == 'All' %}selected{% endif %}>All</option>
+                <option value="Easy" {% if difficulty == 'Easy' %}selected{% endif %}>Easy</option>
+                <option value="Medium" {% if difficulty == 'Medium' %}selected{% endif %}>Medium</option>
+                <option value="Hard" {% if difficulty == 'Hard' %}selected{% endif %}>Hard</option>
+            </select>
+            <button type="submit" class="btn-view" style="padding: 10px 20px; border:none; border-radius:5px; cursor:pointer;">Search</button>
+        </form>
+    </div>
+
+    <div class="results-grid">
+        {% for r in results %}
+            <div class="recipe-card">
+                <div class="recipe-content">
+                    <h3 class="recipe-title">{{ r.title }}</h3>
+                    <p class="recipe-meta">{{ r.cuisine }} ({{ r.difficulty }})</p>
+                    <a href="view.php?id={{ r.id }}" class="view-link">View Full Recipe</a>
+                </div>
+            </div>
+        {% else %}
+            <p style="text-align:center; margin-top: 20px;">No recipes found. Try a different search!</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

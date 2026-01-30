@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ recipe.title }} - Details{% endblock %}
+
+{% block content %}
+<div class="form-container" style="max-width: 800px;">
+    <h2 style="text-align:center; border-bottom: 2px solid #eee; padding-bottom:10px;">{{ recipe.title }}</h2>
+    
+    <div class="detail-meta" style="display:flex; justify-content: space-around; margin: 20px 0;">
+        <span><strong>🌍 Cuisine:</strong> {{ recipe.cuisine }}</span>
+        <span><strong>📊 Difficulty:</strong> {{ recipe.difficulty }}</span>
+    </div>
+
+    <div class="recipe-section">
+        <h3>🛒 Ingredients</h3>
+        <ul>
+            {% for ing in ingredients %}
+                <li>{{ ing.ingredient_name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="recipe-section">
+        <h3>📝 Instructions</h3>
+        <p style="white-space: pre-wrap; line-height: 1.6;">{{ recipe.instructions }}</p>
+    </div>
+
+    <div style="margin-top: 30px; display: flex; gap: 10px;">
+        <a href="index.php" class="btn-action btn-back" style="background:#7f8c8d; color:white; padding:10px; text-decoration:none; border-radius:5px;">Back</a>
+        <a href="edit.php?id={{ recipe.id }}" class="btn-action btn-edit">Edit</a>
+    </div>
+</div>
+{% endblock %}

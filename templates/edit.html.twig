@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Edit {{ recipe.title }}</h2>
+
+    <form method="POST">
+
+        <label>Title</label>
+        <input type="text" name="title" value="{{ recipe.title }}" required>
+
+        <label>Cuisine</label>
+        <input type="text" name="cuisine" value="{{ recipe.cuisine }}" required>
+
+        <label>Difficulty</label>
+        <select name="difficulty">
+            <option {% if recipe.difficulty == 'Easy' %}selected{% endif %}>Easy</option>
+            <option {% if recipe.difficulty == 'Medium' %}selected{% endif %}>Medium</option>
+            <option {% if recipe.difficulty == 'Hard' %}selected{% endif %}>Hard</option>
+        </select>
+
+        <label>Ingredients</label>
+        <div id="ingredient-container">
+            {% for ing in ingredients %}
+                <div class="ingredient-wrapper">
+                    <input type="text" name="ingredients[]" value="{{ ing.ingredient_name }}">
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="button"
+                class="btn-orange"
+                onclick="addIngredientField()">
+            + Add Ingredient
+        </button>
+
+        <label>Instructions</label>
+        <textarea name="instructions" rows="5">{{ recipe.instructions }}</textarea>
+
+        <button type="submit">
+            Update Recipe
+        </button>
+
+    </form>
+</div>
+{% endblock %}

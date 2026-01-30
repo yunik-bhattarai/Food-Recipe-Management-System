@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Add New Recipe</h2>
+    <form method="POST" action="add.php">
+        <label>Recipe Title</label>
+        <input type="text" name="title" placeholder="e.g. Chicken Curry" required>
+        
+        <label>Cuisine Type</label>
+        <input type="text" name="cuisine" placeholder="e.g. Indian" required>
+        
+        <label>Difficulty</label>
+        <select name="difficulty">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+
+        <label>Ingredients (Type to see suggestions)</label>
+        <div id="ingredient-container">
+            <div class="ingredient-wrapper" style="position:relative; margin-bottom:10px;">
+                <input type="text" name="ingredients[]" class="ing-input" placeholder="Start typing ingredient..." onkeyup="showSuggestions(this)">
+                <div class="suggestions"></div>
+            </div>
+        </div>
+        
+        <button type="button" onclick="addIngredientField()" class="btn-orange">+ Add More</button>
+
+        <label style="display:block; margin-top:15px;">Instructions</label>
+        <textarea name="instructions" rows="5" placeholder="Step by step guide..." required></textarea>
+
+        <button type="submit" class="btn-save" style="background-color: #27ae60; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; margin-top: 20px; cursor: pointer;">
+            Save Recipe
+        </button>
+    </form>
+</div>
+{% endblock %}
