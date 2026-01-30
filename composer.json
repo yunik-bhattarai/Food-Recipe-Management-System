@@ -1,0 +1,17 @@
+{
+    "name": "yunik/recipe_project",
+    "autoload": {
+        "psr-4": {
+            "Yunik\\RecipeProject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yunik Bhattarai",
+            "email": "yunik.b22@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "3.15"
+    }
+}
