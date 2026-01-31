@@ -4,65 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Recipe Management{% endblock %}</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=4">
+    <link rel="stylesheet" href="assets/css/style.css?v={{ "now"|date('U') }}">
+    
     <style>
-        /* This setup forces the footer to stay at the very bottom */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-        main {
-            flex: 1 0 auto; /* Pushes footer down */
+        /* Your existing styles remain here... */
+        html, body { margin: 0; padding: 0; width: 100% !important; }
+        header { width: 100% !important; background-color: #2c3e50 !important; display: flex !important; flex-direction: column !important; align-items: center !important; padding: 0 !important; }
+        header h1 { color: white !important; margin: 0 !important; padding: 20px 0 !important; text-align: center !important; width: 100% !important; }
+        nav { width: 100% !important; background-color: #34495e !important; display: flex !important; justify-content: flex-end !important; padding: 12px 0 !important; margin: 0 !important; }
+        .nav-content { display: flex !important; width: auto !important; max-width: none !important; margin: 0 !important; padding-right: 50px !important; }
+        nav a { color: white !important; text-decoration: none !important; margin-left: 30px !important; font-weight: 500 !important; }
+        main { width: 100% !important; max-width: 1100px !important; margin: 0 auto !important; padding: 40px 20px !important; box-sizing: border-box !important; }
+
+        /* ADD THIS CSS to make your suggestions visible */
+        .suggestions {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
             width: 100%;
-            max-width: 1200px; /* Keeps content centered but footer remains wide */
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Full-width Header */
-        header {
-            width: 100%;
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        /* FULL-WIDTH WIDE FOOTER */
-        footer {
-            width: 100%; /* Makes it span the whole screen */
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: auto; /* Final insurance for bottom placement */
-        }
-
-        /* Grid Force */
-        .results-grid, .recipe-grid {
-            display: grid !important;
-            grid-template-columns: repeat(3, 1fr) !important;
-            gap: 20px;
+            z-index: 1000;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Food Recipe Management</h1>
         <nav>
-            <a href="index.php" style="color:white; margin:0 10px; text-decoration:none;">Home</a>
-            <a href="add.php" style="color:white; margin:0 10px; text-decoration:none;">Add Recipe</a>
-            <a href="search.php" style="color:white; margin:0 10px; text-decoration:none;">Search</a>
-            {% if session_user %}
-                <a href="logout.php" style="color:white; margin:0 10px; text-decoration:none;">Logout ({{ session_user }})</a>
-            {% else %}
-                <a href="login.php" style="color:white; margin:0 10px; text-decoration:none;">Login</a>
-            {% endif %}
+            <div class="nav-content">
+                <a href="index.php">Home</a>
+                <a href="add.php">Add Recipe</a>
+                <a href="search.php">Search</a>
+                {% if session_user %}
+                    <a href="logout.php">Logout ({{ session_user }})</a>
+                {% else %}
+                    <a href="login.php">Login</a>
+                {% endif %}
+            </div>
         </nav>
     </header>
 
@@ -70,10 +50,10 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <p style="margin:0;">&copy; 2026 Recipe Management System | YB</p>
+    <footer style="width:100%; background:#2c3e50; color:white; text-align:center; padding:20px 0; margin-top:auto;">
+        <p>&copy; 2026 Food Recipe Management - YB</p>
     </footer>
 
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js?v={{ "now"|date('U') }}"></script>
 </body>
 </html>

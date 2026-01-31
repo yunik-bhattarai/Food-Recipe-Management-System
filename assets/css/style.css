@@ -1,48 +1,72 @@
 /* 1. General Reset & Base Styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Required for sticky footer */
+}
+
 body { 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     background-color: #f8f9fa; 
-    margin: 0; 
     color: #333;
+    display: flex;
+    flex-direction: column; /* Pushes footer to bottom */
 }
 
-/* 2. Header & Navigation */
-h1 { 
-    background-color: #2c3e50; 
-    color: white; 
-    padding: 20px; 
-    text-align: center; 
-    margin: 0; 
+/* 2. Full-Width Header & Navigation */
+header {
+    width: 100%;
+    background-color: #2c3e50;
+    color: white;
+}
+
+header h1 {
+    margin: 0;
+    padding: 20px 0;
+    text-align: center;
 }
 
 nav { 
     background-color: #34495e; 
-    padding: 12px 30px; 
-    text-align: right; 
+    width: 100%;
+    padding: 12px 0; 
+}
+
+.nav-content { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 40px; 
+    display: flex;
+    justify-content: flex-end; /* Pushes links to the right */
+    align-items: center;
 }
 
 nav a { 
     color: #ecf0f1; 
-    margin-left: 20px; 
+    margin-left: 30px; 
     text-decoration: none; 
     font-weight: 500; 
+    transition: 0.3s;
 }
 
 nav a:hover {
     color: #27ae60;
 }
 
-/* 3. Layout Containers */
-.container, .search-container {
+/* 3. Main Layout Container */
+main {
+    flex: 1; /* Occupies remaining space, pushing footer down */
+    width: 100%;
     max-width: 1100px;
-    margin: 30px auto;
-    padding: 0 20px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
 }
 
 /* 4. Form Design (Login, Signup, Add/Edit) */
 .form-container, .search-box {
     max-width: 600px;
-    margin: 40px auto;
+    margin: 20px auto;
     background: #ffffff;
     padding: 35px;
     border-radius: 12px;
@@ -74,7 +98,7 @@ textarea {
     font-size: 15px;
 }
 
-/* Submit Button */
+/* Reusable Buttons */
 button[type="submit"] {
     width: 100%;
     padding: 12px;
@@ -86,88 +110,13 @@ button[type="submit"] {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
 button[type="submit"]:hover {
     background-color: #219150;
 }
 
-/* 5. Recipe Cards & Lists */
-.recipe-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.results-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.recipe-card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border: 1px solid #eee;
-}
-
-.recipe-card:hover { 
-    transform: translateY(-5px); 
-}
-
-.recipe-title {
-    margin: 0 0 10px 0;
-    color: #2c3e50;
-    font-size: 1.25rem;
-}
-
-.recipe-meta, .recipe-info {
-    color: #7f8c8d;
-    font-size: 0.95rem;
-    margin-bottom: 15px;
-}
-
-/* 6. Action Buttons */
-.recipe-actions {
-    padding: 15px;
-    display: flex;
-    gap: 10px;
-    background: #fafafa;
-    border-top: 1px solid #eee;
-}
-
-.btn-action {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-.btn-view { background: #27ae60; }
-.btn-edit { background: #f39c12; }
-.btn-delete { background: #e74c3c; }
-
-/* 7. Ingredient Section (ADD & EDIT PAGE) */
-#ingredient-container {
-    margin-top: 10px;
-}
-
-.ingredient-wrapper {
-    margin-bottom: 10px;
-}
-
-.ingredient-wrapper input[type="text"] {
-    width: 100%;
-}
-
-/* Reusable Orange Button (+ Add Ingredient) */
 .btn-orange {
     background-color: #f39c12;
     color: white;
@@ -183,7 +132,58 @@ button[type="submit"]:hover {
     background-color: #e67e22;
 }
 
-/* 8. Ajax Suggestions */
+/* 5. Recipe Cards & Lists */
+.recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.results-grid {
+    display: grid; /* Changed to grid for better control */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.recipe-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    transition: transform 0.3s;
+}
+
+.recipe-card:hover { 
+    transform: translateY(-5px); 
+}
+
+/* 6. Action Buttons in Cards */
+.recipe-actions {
+    margin-top: 15px;
+    padding-top: 15px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #eee;
+}
+
+.btn-action {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.btn-view { background: #27ae60; }
+.btn-edit { background: #f39c12; }
+.btn-delete { background: #e74c3c; }
+
+/* 7. Ajax Suggestions */
 .suggestions {
     position: absolute;
     background: white;
@@ -202,15 +202,41 @@ button[type="submit"]:hover {
 .suggestions div:hover { 
     background: #f0f0f0; 
 }
+
+/* 8. Full-Width Footer */
 footer {
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    padding: 2rem 0;
-    margin-top: auto; /* Pushes footer to bottom if page is short */
     width: 100%;
+    background-color: #2c3e50;
+    color: #bdc3c7;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+}
+/* Full-width Nav Bar Background */
+nav {
+    background-color: #34495e;
+    width: 100%;
+    padding: 12px 0;
 }
 
-footer p {
-    margin: 0;
-    font-size: 0.9rem;
+/* Updated to stretch links to the far right */
+.nav-content {
+    width: 100%;             /* Changed from max-width to 100% */
+    display: flex;
+    justify-content: flex-end; /* Pushes links to the absolute right */
+    align-items: right;
+    box-sizing: border-box;
+    padding: 0 40px;          /* Adds a small gap from the very edge for beauty */
+}
+
+nav a {
+    color: white;
+    margin-left: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #27ae60;
 }
