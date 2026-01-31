@@ -4,27 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Recipe Management{% endblock %}</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=4">
+    <style>
+        /* This setup forces the footer to stay at the very bottom */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1 0 auto; /* Pushes footer down */
+            width: 100%;
+            max-width: 1200px; /* Keeps content centered but footer remains wide */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Full-width Header */
+        header {
+            width: 100%;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* FULL-WIDTH WIDE FOOTER */
+        footer {
+            width: 100%; /* Makes it span the whole screen */
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: auto; /* Final insurance for bottom placement */
+        }
+
+        /* Grid Force */
+        .results-grid, .recipe-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Food Recipe Database</h1>
+        <h1>Food Recipe Management</h1>
         <nav>
-            <a href="index.php">Home</a>
-            <a href="add.php">Add Recipe</a>
-            <a href="search.php">Search</a>
+            <a href="index.php" style="color:white; margin:0 10px; text-decoration:none;">Home</a>
+            <a href="add.php" style="color:white; margin:0 10px; text-decoration:none;">Add Recipe</a>
+            <a href="search.php" style="color:white; margin:0 10px; text-decoration:none;">Search</a>
             {% if session_user %}
-                <a href="logout.php">Logout ({{ session_user }})</a>
+                <a href="logout.php" style="color:white; margin:0 10px; text-decoration:none;">Logout ({{ session_user }})</a>
             {% else %}
-                <a href="login.php">Login</a>
+                <a href="login.php" style="color:white; margin:0 10px; text-decoration:none;">Login</a>
             {% endif %}
         </nav>
     </header>
 
-    <main class="container">
+    <main>
         {% block content %}{% endblock %}
     </main>
 
-    <script src="../assets/js/script.js"></script>
+    <footer>
+        <p style="margin:0;">&copy; 2026 Recipe Management System | YB</p>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
