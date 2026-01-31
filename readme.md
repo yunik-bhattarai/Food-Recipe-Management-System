@@ -14,6 +14,11 @@ https://student.bicnepal.edu.np/~np02cs4a240001/
 
 ---
 
+## GitHub Repository
+https://github.com/yunik-bhattarai/Food-Recipe-Management-System.git
+
+---
+
 ## Login Credentials
 **Username:** yunik  
 **Password:** 12345678  
